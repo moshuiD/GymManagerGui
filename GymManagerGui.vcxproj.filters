@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Form">
+      <UniqueIdentifier>{4e23deaa-851e-4534-a7d9-6a96ec25c593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Database">
+      <UniqueIdentifier>{9a76ba94-9b4a-41e5-bede-44b9f7f19b92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreFunc">
+      <UniqueIdentifier>{e937e1ce-cb88-4204-b391-a8e532c8a9b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL">
+      <UniqueIdentifier>{8f3bab1a-4eab-4198-945b-b5a43d71f92d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GymManagerGui.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MainForm.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="FileHelper.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="CardManager.h">
+      <Filter>CoreFunc</Filter>
+    </ClInclude>
+    <ClInclude Include="AccessManager.h">
+      <Filter>CoreFunc</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="DataSaveFormat.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="STL.h">
+      <Filter>STL</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GymManagerGui.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MainForm.c">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="Database.c">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="FileHelper.c">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="CardManager.c">
+      <Filter>CoreFunc</Filter>
+    </ClCompile>
+    <ClCompile Include="AccessManager.c">
+      <Filter>CoreFunc</Filter>
+    </ClCompile>
+    <ClCompile Include="DataSaveFormat.c">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="STL.c">
+      <Filter>STL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GymManagerGui.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="GymManagerGui.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
