@@ -3,10 +3,9 @@ int for_each(iterator begin, _Fn func) {
 	if (IsBadReadPtr(begin, sizeof(iterator))) {
 		return -1;
 	}
-	iterator iNextNode = begin->m_Next;
-	while (NULL != iNextNode) {
-		func(iNextNode->m_Data);
-		iNextNode = iNextNode->m_Next;
+	for (iterator iter = begin; NULL != iter; iter=iter->m_Next)
+	{
+		func(iter->m_Data);
 	}
 	return 0;
 }

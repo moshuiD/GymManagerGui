@@ -6,3 +6,4 @@ typedef enum {
 	LocalDatabaseOpenFaild,
 
 }DatabaseState;
+DatabaseState InitDatabase();

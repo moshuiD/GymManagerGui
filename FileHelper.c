@@ -10,3 +10,6 @@ FileHelperState InitFileHelper() {
 inline FileHelperState SaveMemberInfo(Member member) {
 	Menbers2Json(member);
 }
+FileHelperState LoadMembers(MemberList* members) {
+
+}

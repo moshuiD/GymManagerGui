@@ -1,6 +1,7 @@
 #pragma once
 #include "framework.h"
 #include "Model.h"
+#include "STL.h"
 typedef enum {
 	FileSuccess,
 	FileOpenError,
@@ -9,3 +10,4 @@ typedef enum {
 
 FileHelperState InitFileHelper();
 inline FileHelperState SaveMemberInfo(Member);
+FileHelperState LoadMembers(MemberList*);
