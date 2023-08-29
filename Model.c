@@ -7,7 +7,7 @@ Member* NewMember() {
 	retV->m_szPhone=(char*)calloc(512, sizeof(char));
 	retV->m_szAddress= (char*)calloc(512, sizeof(char));
 	retV->m_Time.m_szInTime = (char*)calloc(512, sizeof(char));
-	retV->m_BodyInfoList = NULL;
+	retV->m_BodyInfoList = NewMemberBodyInfoList();
 	return retV;
 }
 

@@ -22,21 +22,36 @@ DatabaseState DeleteMember(unsigned int id) {
 		if (member->m_data->m_uID == id) {
 			FreeMember(erase(member));
 			ClearAll();
-			SaveMembers(memberList);
-			break;
+			return SaveMembers(memberList);
 		}
 	}
 }
 
-DatabaseState EditMember(unsigned int id,Member* newInfo) {
+DatabaseState EditMember(unsigned int id,Member* const newInfo) {
 	MemberNode* member = NULL;
 	for (int state = ListFirst(memberList, &member); STATE_SUCCESS  == state; state = ListNext(member, &member)) {
 		if (member->m_data->m_uID == id) {
 			FreeMember(member->m_data);
 			member->m_data = newInfo;
 			ClearAll();
-			SaveMembers(memberList);
-			break;
+			return SaveMembers(memberList);
 		}
 	}
+}
+
+DatabaseState GetMember(unsigned int id, Member** pOutMember) {
+	MemberNode* member = NULL;
+	for (int state = ListFirst(memberList, &member); STATE_SUCCESS == state; state = ListNext(member, &member)) {
+		if (member->m_data->m_uID == id) {
+			*pOutMember = member->m_data;
+			return DatabaseSuccess;
+		}
+	}
+	*pOutMember = NULL;
+	return DatabaseSuccess;
+}
+
+DatabaseState SyncDatabase() {
+	ClearAll();
+	return SaveMembers(memberList);
 }

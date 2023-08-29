@@ -15,14 +15,16 @@ int push_back(iterator begin, void* data)
 		return -1;
 	}
 
-	if (NULL == begin->m_Data) {//The first node.
+	if (NULL == begin->m_Data) {//If is the first node.
 		begin->m_Data = data;
 		begin->m_Next = NULL;
 		return STATE_SUCCESS;
 	}
 	iterator iter = begin;
+	int num = 0;
 	do
 	{
+		num++;
 		if (NULL == iter->m_Next) {
 			iterator tempNode = (iterator)malloc(sizeof(struct Node));
 			tempNode->m_Data = data;
@@ -35,6 +37,9 @@ int push_back(iterator begin, void* data)
 			iter = iter->m_Next;
 		}
 		iter = iter->m_Next;
+		if (num == iter->m_uMax) {
+			return ~0;
+		}
 	} while (NULL != iter);
 	return STATE_SUCCESS;
 }
