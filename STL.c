@@ -72,21 +72,21 @@ iterator erase(iterator iter) {
 	}
 }
 //Can't ensure data is valid
-int ListFirst(iterator begin, void* node) {
+int ListFirst(iterator begin, void** pNode) {
 	if (IsBadReadPtr(begin, sizeof(iterator))) {
 		return -1;
 	}
-	node = begin;
+	*pNode = begin;
 	return STATE_SUCCESS;
 }
 //Can't ensure data is valid
-int ListNext(iterator curret, void* node) {
+int ListNext(iterator curret, void** pNode) {
 	if (IsBadReadPtr(curret, sizeof(iterator))) {
 		return -1;
 	}
 	if (NULL == curret->m_Next) {
 		return -1;
 	}
-	node = curret->m_Next;
+	*pNode = curret->m_Next;
 	return STATE_SUCCESS;
 }

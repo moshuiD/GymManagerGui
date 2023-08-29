@@ -15,6 +15,6 @@ iterator pop_back(iterator);
 iterator erase(iterator);
 //Have some Mircosoft style :D
 /////////////////////////////////////////
-int ListFirst(iterator begin, void* node);
-int ListNext(iterator curret, void* node);
+int ListFirst(iterator begin, void** pNode);
+int ListNext(iterator curret, void** pNode);
 /////////////////////////////////////////

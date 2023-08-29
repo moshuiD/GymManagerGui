@@ -21,7 +21,10 @@ typedef enum
 	Female,
 	Unknown
 }Gander;
-
+typedef enum {
+	 Out,
+	 In
+}MemberState;
 typedef struct {
 	unsigned int m_uID;
 	char* m_szName;
@@ -31,6 +34,12 @@ typedef struct {
 	char* m_szAddress;
 	char* m_szPhone;
 	float m_fmoney;
+	MemberState m_State;
+	union InOutTimeStamp
+	{
+		char* m_szInTime;
+		char* m_szLeaveTime;
+	}m_Time;
 	MemberBodyInfoList* m_BodyInfoList;
 }Member;
 

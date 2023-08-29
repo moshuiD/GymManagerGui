@@ -15,3 +15,4 @@ FileHelperState InitFileHelper();
 FileHelperState SaveMemberInfo(Member*);
 FileHelperState SaveMembers(MemberList*);
 FileHelperState LoadMembers(MemberList*);
+FileHelperState ClearAll();

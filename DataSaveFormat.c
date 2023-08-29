@@ -27,7 +27,9 @@ int Member2Json(Member* const member, char* buffer) {
 		"\"m_Gander\": %d, "
 		"\"m_szAddress\": \"%s\", "
 		"\"m_szPhone\": \"%s\", "
-		"\"m_fmoney\": %f,"
+		"\"m_fmoney\": %f, "
+		"\"m_State\": %d, "
+		"\"m_Time\": \"%s\", "
 		"\"MemberBodyInfo\":[",
 		member->m_uID,
 		member->m_szName,
@@ -36,7 +38,9 @@ int Member2Json(Member* const member, char* buffer) {
 		member->m_Gander,
 		member->m_szAddress,
 		member->m_szPhone,
-		member->m_fmoney);
+		member->m_fmoney,
+		member->m_State,
+		member->m_Time.m_szInTime);
 	if (-1 == returnCode) {
 		buffer = '\0';
 		return -1;
@@ -55,7 +59,9 @@ int Json2Member(char* const src, Member* dest) {
 		"\"m_Gander\": %d, "
 		"\"m_szAddress\": \"%512[^\"]\", "
 		"\"m_szPhone\": \"%512[^\"]\", "
-		"\"m_fmoney\": %f,"
+		"\"m_fmoney\": %f, "
+		"\"m_State\": %d, "
+		"\"m_Time\": \"%512[^\"]\", "
 		"\"MemberBodyInfo\":[",
 		&dest->m_uID,
 		dest->m_szName,
@@ -64,7 +70,9 @@ int Json2Member(char* const src, Member* dest) {
 		&dest->m_Gander,
 		dest->m_szAddress,
 		dest->m_szPhone,
-		&dest->m_fmoney);
+		&dest->m_fmoney,
+		&dest->m_State,
+		dest->m_Time.m_szInTime);
 	if (-1 == returnCode) {
 		memset(dest, 0, sizeof(Member));
 		return -1;

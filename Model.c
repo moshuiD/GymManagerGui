@@ -6,6 +6,7 @@ Member* NewMember() {
 	retV->m_szDateOfBirth= (char*)calloc(512, sizeof(char));
 	retV->m_szPhone=(char*)calloc(512, sizeof(char));
 	retV->m_szAddress= (char*)calloc(512, sizeof(char));
+	retV->m_Time.m_szInTime = (char*)calloc(512, sizeof(char));
 	retV->m_BodyInfoList = NULL;
 	return retV;
 }
@@ -15,6 +16,7 @@ void FreeMember(Member* member) {
 	free(member->m_szDateOfBirth);
 	free(member->m_szAddress);
 	free(member->m_szPhone);
+	free(member->m_Time.m_szInTime);
 	FreeMemberBodyInfoList(member->m_BodyInfoList);
 	free(member);
 }
