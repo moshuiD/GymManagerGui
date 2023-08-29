@@ -7,8 +7,11 @@ typedef enum {
 	FileSuccess,
 	FileOpenError,
 	FileLoaderMemberError,
+	FileSaveError,
+	FileCloseError
 }FileHelperState;
 
 FileHelperState InitFileHelper();
-inline FileHelperState SaveMemberInfo(Member);
+FileHelperState SaveMemberInfo(Member*);
+FileHelperState SaveMembers(MemberList*);
 FileHelperState LoadMembers(MemberList*);

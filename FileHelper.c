@@ -1,33 +1,71 @@
 #include "FileHelper.h"
-static FILE* fpLocalDatabase;
+
+static char szPath[1024];
 FileHelperState InitFileHelper() {
-	char szPath[1024];
 	GetCurrentDirectoryA(1024, szPath);
 	strcat(szPath, "\\database.db");
-	fpLocalDatabase = fopen(szPath, "a+");
-	if (NULL == fpLocalDatabase) {
-		return FileOpenError;
-	}
 	return FileSuccess;
 }
 
-inline FileHelperState SaveMemberInfo(Member member) {
+FileHelperState SaveMemberInfo(Member* member) {
+	FILE* fpLocalDatabase = fopen(szPath, "a+");
+	if (NULL == fpLocalDatabase) {
+		return FileOpenError;
+	}
 	char buff[1024] = { 0 };
-	Members2Json(&member,buff);
+	if (STATE_SUCCESS != Member2Json(member, buff)) {
+		return FileSaveError;
+	}
+	if (fprintf(fpLocalDatabase, "%s\n", buff) == -1) {
+		return FileSaveError;
+	}
+	return fclose(fpLocalDatabase) == 0 ? FileSuccess : FileCloseError;
 }
+
 FileHelperState LoadMembers(MemberList* members) {
 	char buff[1024] = { 0 };
 	int numOfBytes = 0;
-
-	while ((numOfBytes = fread(buff, sizeof(char), sizeof(buff), fpLocalDatabase) > 0)) {
+	FILE* fpLocalDatabase = fopen(szPath, "r");
+	if (NULL == fpLocalDatabase) {
+		return FileOpenError;
+	}
+	while ((numOfBytes = fgets(buff, sizeof(buff), fpLocalDatabase) > 0)) {
 		Member* member = NewMember();
-		if (-1 == Json2Member(buff, member)) {
+		if (STATE_SUCCESS != Json2Member(buff, member)) {
 			FreeMember(member);
+			fclose(fpLocalDatabase);
 			return FileLoaderMemberError;
 		}
-		if (-1 == push_back(members->m_Begin, member)){
+		if (STATE_SUCCESS != push_back(members->m_Begin, member)) {
 			FreeMember(member);
+			fclose(fpLocalDatabase);
 			return FileLoaderMemberError;
 		}
 	}
+	return fclose(fpLocalDatabase) == 0 ? FileSuccess : FileCloseError;
+}
+FileHelperState SaveMembers(MemberList* members) {
+	FILE* fpLocalDatabase = fopen(szPath, "a+");
+	if (NULL == fpLocalDatabase) {
+		return FileOpenError;
+	}
+	MemberNode* member = NULL;
+	for (int state = ListFirst(members->m_Begin, member); STATE_SUCCESS == state; state = ListNext(member, member)) {
+		char buff[1024] = { 0 };
+		if (Member2Json(member->m_data, buff) != STATE_SUCCESS) {
+			return FileSaveError;
+		}
+		if (fprintf(fpLocalDatabase, "%s\n", buff) == -1) { 
+			fclose(fpLocalDatabase);
+			return FileSaveError; 
+		}
+	}
+	return fclose(fpLocalDatabase) == 0 ? FileSuccess : FileCloseError;
+}
+FileHelperState ClearAll() {
+	FILE* fpLocalDatabase = fopen(szPath, "w");
+	if (NULL == fpLocalDatabase) {
+		return FileOpenError;
+	}
+	return fclose(fpLocalDatabase) == 0 ? FileSuccess : FileCloseError;
 }

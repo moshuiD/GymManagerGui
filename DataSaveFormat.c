@@ -5,7 +5,7 @@ static void MembersInfoCallBack(void* info) {
 	MemberBodyInfo* const tempInfo = info;
 	sprintf(buff,
 		"{"
-		"\"m_szDate\": \"%s,\", "
+		"\"m_szDate\": \"%s\", "
 		"\"m_uHeight\": \"%u\", "
 		"\"m_uWeight\": \"%u\", "
 		"\"m_fBodyFat\": %f "
@@ -16,7 +16,7 @@ static void MembersInfoCallBack(void* info) {
 		tempInfo->m_fBodyFat);
 	strcat(szThisBuffer, buff);
 }
-int Members2Json(Member* const member, char* buffer) {
+int Member2Json(Member* const member, char* buffer) {
 	szThisBuffer = buffer;
 	int returnCode = sprintf(buffer,
 		"{"
@@ -43,7 +43,8 @@ int Members2Json(Member* const member, char* buffer) {
 	}
 	for_each((iterator)member->m_BodyInfoList->m_Begin, MembersInfoCallBack);
 	buffer[strlen(buffer) - 1] = '\0';
-	strcat(buffer, "]}\r\n");
+	strcat(buffer, "]}");
+	return STATE_SUCCESS;
 }
 int Json2Member(char* const src, Member* dest) {
 	int returnCode = sscanf(src, "{"
@@ -71,12 +72,12 @@ int Json2Member(char* const src, Member* dest) {
 	char* memberBodyInfoNode = strstr(src, "\"MemberBodyInfo\"");
 	if (NULL == memberBodyInfoNode) {
 		dest->m_BodyInfoList = NULL;
-		return 0;
+		return STATE_SUCCESS;
 	}
 	dest->m_BodyInfoList = NewMemberBodyInfoList();
 	for (char* bodyInfo = strstr(memberBodyInfoNode, "{"); NULL != bodyInfo; bodyInfo = strstr(bodyInfo, "{")) {
 		MemberBodyInfo* bodyInfoNode = NewMemberBodyInfo();
-		sscanf(bodyInfo, "{\"m_szDate\": \"%512[^\"]\", \"m_uHeight\": \"%u\", \"m_uWeight\": \"%u\", \"m_fBodyFat\": %f }", 
+		sscanf(bodyInfo, "{\"m_szDate\": \"%512[^\"]\", \"m_uHeight\": \"%u\", \"m_uWeight\": \"%u\", \"m_fBodyFat\": %f }",
 			bodyInfoNode->m_szDate,
 			&bodyInfoNode->m_uHeight,
 			&bodyInfoNode->m_uWeight,
@@ -84,4 +85,5 @@ int Json2Member(char* const src, Member* dest) {
 		push_back(dest->m_BodyInfoList->m_Begin, bodyInfoNode);
 		bodyInfo = strchr(bodyInfo, '}');
 	}
+	return STATE_SUCCESS;
 }
