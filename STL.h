@@ -10,4 +10,4 @@ typedef void(* _Fn)(void*);
 
 int for_each(iterator, _Fn);
 int push_back(iterator, void*);
-int pop_back(iterator);
+iterator pop_back(iterator);

@@ -89,6 +89,9 @@
     <ClCompile Include="STL.c">
       <Filter>STL</Filter>
     </ClCompile>
+    <ClCompile Include="Model.c">
+      <Filter>Database</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GymManagerGui.rc">

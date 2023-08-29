@@ -2,5 +2,6 @@
 #include "Model.h"
 #include "framework.h"
 #include "STL.h"
-int Menbers2Json(Member* const member, char* buffer);
+int Members2Json(Member* const , char*);
+int Json2Member(char* const, Member*);
 

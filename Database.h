@@ -4,6 +4,6 @@
 typedef enum {
 	DatabaseSuccess,
 	LocalDatabaseOpenFaild,
-
+	LocalDatabaseLoaderMemberError,
 }DatabaseState;
 DatabaseState InitDatabase();

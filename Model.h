@@ -1,4 +1,6 @@
 #pragma once
+#include <stdlib.h>
+#include "STL.h"
 typedef struct {
 	char* m_szDate;
 	unsigned int m_uHeight;
@@ -29,7 +31,7 @@ typedef struct {
 	char* m_szAddress;
 	char* m_szPhone;
 	float m_fmoney;
-	MemberBodyInfoList m_BodyInfoList;
+	MemberBodyInfoList* m_BodyInfoList;
 }Member;
 
 typedef struct MemberNode {
@@ -38,3 +40,13 @@ typedef struct MemberNode {
 	Member* m_data;
 	struct MemberNode* m_Next;
 }MemberNode, MemberList;
+
+MemberBodyInfo* NewMemberBodyInfo();
+void FreeMemberBodyInfo(MemberBodyInfo*);
+MemberBodyInfoList* NewMemberBodyInfoList();
+void FreeMemberBodyInfoList(MemberBodyInfoList*);
+
+Member* NewMember();
+void FreeMember(Member*);
+MemberList* NewMemberList();
+void FreeMemberList(MemberList*);

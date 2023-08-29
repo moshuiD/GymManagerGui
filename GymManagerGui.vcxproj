@@ -148,6 +148,7 @@
     <ClCompile Include="FileHelper.c" />
     <ClCompile Include="GymManagerGui.c" />
     <ClCompile Include="MainForm.c" />
+    <ClCompile Include="Model.c" />
     <ClCompile Include="STL.c" />
   </ItemGroup>
   <ItemGroup>
