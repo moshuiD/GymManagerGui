@@ -190,6 +190,7 @@ static LRESULT OnNotify(HWND hWnd, NMHDR* lParam)
 	}
 	return TRUE;
 }
+
 INT_PTR CALLBACK MainFormCallBack(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	UNREFERENCED_PARAMETER(lParam);
@@ -235,6 +236,7 @@ INT_PTR CALLBACK MainFormCallBack(HWND hDlg, UINT message, WPARAM wParam, LPARAM
 			case(IDC_ADDMEMBER): {
 				SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 				DialogBox(hInst, MAKEINTRESOURCE(IDD_AddMemberForm), g_hDlg, AddMemberFormCallBack);
+				//DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG2), g_hDlg, DIALOG2);
 				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 				RefreshMemberList();
 				break;
