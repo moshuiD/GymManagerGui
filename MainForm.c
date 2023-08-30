@@ -275,8 +275,10 @@ INT_PTR CALLBACK MainFormCallBack(HWND hDlg, UINT message, WPARAM wParam, LPARAM
 			}
 			case(IDC_RECHARGE): {
 				SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-				DialogBox(hInst, MAKEINTRESOURCE(IDD_RechargeForm), g_hDlg, RechargeFormCallBack);
+				DialogBoxParam(hInst, MAKEINTRESOURCE(IDD_RechargeForm), g_hDlg, RechargeFormCallBack, &g_MembersSelectedid);
+				MessageBox(NULL, "充值成功！", "提示", MB_OK);
 				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+				RefreshMemberList();
 				break;
 			}
 			default:
