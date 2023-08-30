@@ -2,4 +2,7 @@
 #include "framework.h"
 #include "GymManagerGui.h"
 #include "Database.h"
-INT_PTR CALLBACK MainForm(HWND, UINT, WPARAM, LPARAM);
+#include "AddMemberForm.h"
+#include "RechargeForm.h"
+#include <CommCtrl.h>
+INT_PTR CALLBACK MainFormCallBack(HWND, UINT, WPARAM, LPARAM);

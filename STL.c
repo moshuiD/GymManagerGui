@@ -36,10 +36,10 @@ int push_back(iterator begin, void* data)
 
 			iter = iter->m_Next;
 		}
-		iter = iter->m_Next;
 		if (num == iter->m_uMax) {
 			return ~0;
 		}
+		iter = iter->m_Next;
 	} while (NULL != iter);
 	return STATE_SUCCESS;
 }
@@ -49,7 +49,7 @@ iterator pop_back(iterator begin) {
 		return NULL;
 	}
 	iterator oldIt = begin;
-	for (iterator iter = begin; NULL != iter->m_Next; iter = iter->m_Next) {
+	for (iterator iter = begin; NULL != iter; iter = iter->m_Next) {
 
 		if (NULL == iter->m_Next) {
 			oldIt->m_Next = NULL;
@@ -75,6 +75,16 @@ iterator erase(iterator iter) {
 		}
 		oldIt = it;
 	}
+}
+iterator at(iterator begin, unsigned int index) {
+	int i = 0;
+	for (iterator it = begin; NULL != it->m_Next; it = it->m_Next) {
+		if (index == i) {
+			return it;
+		}
+		i++;
+	}
+	return NULL;
 }
 //Can't ensure data is valid
 int ListFirst(iterator begin, void** pNode) {

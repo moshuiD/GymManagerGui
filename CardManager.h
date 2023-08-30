@@ -1,4 +1,6 @@
 #pragma once
 #include "Database.h"
-int SignUpCard(char* const name, char* const birthDay, unsigned int age, Gander gander, char* const addr, char* const phone);
+Member* InitCardManager();
+int SignUpCard(Member* mem);
 int RechargeCard(unsigned int id, float money);
+int DeleteCard(unsigned int id);

@@ -44,14 +44,14 @@ AccessManagerErrorCode LeaveGym(unsigned int id) {
 	struct tm* info;
 	time(&currentTime);
 	double interval = difftime(currentTime, inTime);
-	if (t_Money - (interval *feePerSecond * 0.8f) < 0) {
+	if (t_Money - (interval * feePerSecond * 0.8f) < 0) {
 		return AccessManager_NotEnoughMoney;
 	}
 	mem->m_fmoney = t_Money - (interval * feePerSecond * 0.8f);
 	SyncDatabase();
 	return STATE_SUCCESS;
 }
-AccessManagerErrorCode AddMemberBodyInfo(unsigned int id,unsigned int height,unsigned int weight, float fat) {
+AccessManagerErrorCode AddMemberBodyInfo(unsigned int id, unsigned int height, unsigned int weight, float fat) {
 	Member* mem = NULL;
 	GetMember(id, mem);
 	if (NULL == mem) {
@@ -60,7 +60,7 @@ AccessManagerErrorCode AddMemberBodyInfo(unsigned int id,unsigned int height,uns
 	if (Out == mem->m_State) {
 		return AccessManager_MemberNotEnter;
 	}
-	MemberBodyInfo* memberBodyInfo	= NewMemberBodyInfo();
+	MemberBodyInfo* memberBodyInfo = NewMemberBodyInfo();
 	time_t currentTime;
 	struct tm* info;
 	time(&currentTime);
@@ -75,4 +75,14 @@ AccessManagerErrorCode AddMemberBodyInfo(unsigned int id,unsigned int height,uns
 	}
 	SyncDatabase();
 	return STATE_SUCCESS;
+}
+AccessManagerErrorCode ReplaceBodyInfo(Member* thisMember, char* const date, MemberBodyInfo* memData) {
+	MemberBodyInfoNode* MemberBodyInfo = NULL;
+	for (int state = ListFirst(thisMember->m_BodyInfoList->m_Begin, &MemberBodyInfo); STATE_SUCCESS == state; state = ListNext(MemberBodyInfo, &MemberBodyInfo)) {
+		if (strcmp(MemberBodyInfo->m_data->m_szDate, date) == 0) {
+			FreeMemberBodyInfo(MemberBodyInfo->m_data);
+			MemberBodyInfo->m_data = memData;
+			SyncDatabase();
+		}
+	}
 }

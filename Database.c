@@ -50,7 +50,9 @@ DatabaseState GetMember(unsigned int id, Member** pOutMember) {
 	*pOutMember = NULL;
 	return DatabaseSuccess;
 }
-
+MemberList* GetMembers() {
+	return memberList;
+}
 DatabaseState SyncDatabase() {
 	ClearAll();
 	return SaveMembers(memberList);

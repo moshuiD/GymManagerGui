@@ -54,6 +54,9 @@ void FreeMemberBodyInfo(MemberBodyInfo* memberBodyInfo) {
 	free(memberBodyInfo);
 }
 static void FreeMemberBodyInfoListCallBack(void* memberBodyInfo) {
+	if (NULL == memberBodyInfo) {
+		return;
+	}
 	FreeMemberBodyInfo(memberBodyInfo);
 }
 void FreeMemberBodyInfoList(MemberBodyInfoList* memberBodyInfoList) {

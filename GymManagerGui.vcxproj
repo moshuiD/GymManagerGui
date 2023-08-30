@@ -43,7 +43,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AccessManager.h" />
+    <ClInclude Include="AddMemberForm.h" />
     <ClInclude Include="CardManager.h" />
     <ClInclude Include="Database.h" />
     <ClInclude Include="DataSaveFormat.h" />
@@ -136,12 +137,14 @@
     <ClInclude Include="GymManagerGui.h" />
     <ClInclude Include="MainForm.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="RechargeForm.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="STL.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AccessManager.c" />
+    <ClCompile Include="AddMemberForm.c" />
     <ClCompile Include="CardManager.c" />
     <ClCompile Include="Database.c" />
     <ClCompile Include="DataSaveFormat.c" />
@@ -149,6 +152,7 @@
     <ClCompile Include="GymManagerGui.c" />
     <ClCompile Include="MainForm.c" />
     <ClCompile Include="Model.c" />
+    <ClCompile Include="RechargeForm.c" />
     <ClCompile Include="STL.c" />
   </ItemGroup>
   <ItemGroup>

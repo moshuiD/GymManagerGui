@@ -1,7 +1,4 @@
-﻿// GymManagerGui.cpp : 定义应用程序的入口点。
-//
-
-#include "framework.h"
+﻿#include "framework.h"
 #include "GymManagerGui.h"
 #include "MainForm.h"
 #define MAX_LOADSTRING 100
@@ -135,7 +132,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		break;
 	case WM_CREATE:
-		DialogBox(hInst, MAKEINTRESOURCE(IDD_MainForm), hWnd, MainForm);
+		DialogBox(hInst, MAKEINTRESOURCE(IDD_MainForm), hWnd, MainFormCallBack);
 		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);

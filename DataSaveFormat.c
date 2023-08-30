@@ -1,6 +1,9 @@
 #include "DataSaveFormat.h"
 static char* szThisBuffer;
 static void MembersInfoCallBack(void* info) {
+	if (NULL == info) {
+		return;
+	}
 	char buff[512] = { 0 };
 	MemberBodyInfo* const tempInfo = info;
 	sprintf(buff,

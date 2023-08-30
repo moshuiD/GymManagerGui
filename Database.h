@@ -16,5 +16,7 @@ DatabaseState DeleteMember(unsigned int id);
 DatabaseState EditMember(unsigned int id, Member* const newInfo);
 //Member** can be modified but need use SyncDatabase to sync.But I don't recommend doing this!!!
 DatabaseState GetMember(unsigned int id, Member**);
-//If use GetMember and modified member.U need use this method to sync data to local database.
+// This method can sync data to local database.If use GetMember and modified member.U must use this method to sync.
 DatabaseState SyncDatabase();
+//Not edit any data.
+MemberList* GetMembers();

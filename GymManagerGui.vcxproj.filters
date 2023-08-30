@@ -63,6 +63,12 @@
     <ClInclude Include="STL.h">
       <Filter>STL</Filter>
     </ClInclude>
+    <ClInclude Include="AddMemberForm.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="RechargeForm.h">
+      <Filter>Form</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GymManagerGui.c">
@@ -91,6 +97,12 @@
     </ClCompile>
     <ClCompile Include="Model.c">
       <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="AddMemberForm.c">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="RechargeForm.c">
+      <Filter>Form</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

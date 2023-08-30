@@ -1,6 +1,9 @@
 #include "CardManager.h"
-int InitCardManager() {
+Member* InitCardManager() {
 	srand(time(0));
+	Member* mem = NewMember();
+	mem->m_uID = GenerateID();
+	return mem;
 }
 static unsigned int GenerateID() {
 	Member* m = NULL;
@@ -9,17 +12,12 @@ static unsigned int GenerateID() {
 	{
 		id = 10000 + rand() % (99999 - 10000 + 1);
 		GetMember(id, &m);
+		if (NULL == m) {
+			return id;
+		}
 	} while (m != NULL);
 }
-int SignUpCard(char* const name, char* const birthDay, unsigned int age, Gander gander, char* const addr, char* const phone) {
-	Member* mem = NewMember();
-	mem->m_uID = GenerateID();
-	strcpy(mem->m_szName, name);
-	strcpy(mem->m_szDateOfBirth, birthDay);
-	mem->m_uAge = age;
-	mem->m_Gander = gander;
-	strcpy(mem->m_szAddress, addr);
-	strcpy(mem->m_szPhone, phone);
+int SignUpCard(Member* mem) {
 	mem->m_fmoney = 500.f;
 	AddMember(mem);
 }
@@ -31,4 +29,9 @@ int RechargeCard(unsigned int id, float money) {
 	}
 	mem->m_fmoney += money;
 	SyncDatabase();
+}
+
+int DeleteCard(unsigned int id)
+{
+	return DeleteMember(id);
 }
