@@ -15,7 +15,7 @@ static inline time_t Char2Time(char* const t) {
 }
 AccessManagerErrorCode EnterGym(unsigned int id) {
 	Member* mem = NULL;
-	GetMember(id, mem);
+	GetMember(id, &mem);
 	if (NULL == mem) {
 		return AccessManager_MemberNotFound;
 	}
@@ -31,17 +31,17 @@ AccessManagerErrorCode EnterGym(unsigned int id) {
 
 AccessManagerErrorCode LeaveGym(unsigned int id) {
 	Member* mem = NULL;
-	GetMember(id, mem);
+	GetMember(id, &mem);
 	if (NULL == mem) {
 		return AccessManager_MemberNotFound;
 	}
 	if (Out == mem->m_State) {
 		return AccessManager_MemberNotEnter;
 	}
+	mem->m_State = Out;
 	float t_Money = mem->m_fmoney;
 	time_t inTime = Char2Time(mem->m_Time.m_szInTime);
 	time_t currentTime;
-	struct tm* info;
 	time(&currentTime);
 	double interval = difftime(currentTime, inTime);
 	if (t_Money - (interval * feePerSecond * 0.8f) < 0) {

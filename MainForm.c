@@ -281,6 +281,31 @@ INT_PTR CALLBACK MainFormCallBack(HWND hDlg, UINT message, WPARAM wParam, LPARAM
 				RefreshMemberList();
 				break;
 			}
+			case(IDC_ENTRY): {
+				SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+				if (EnterGym(g_MembersSelectedid)==STATE_SUCCESS) {
+					MessageBox(NULL, "进入成功！", "提示", MB_OK);
+					RefreshMemberList();
+				}
+				else {
+					MessageBox(NULL, "会员已进入！", "错误", MB_OK);
+				}
+				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+				break;
+			}
+			case(IDC_LEAVE): {
+				SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+				
+				if (LeaveGym(g_MembersSelectedid) == STATE_SUCCESS) {
+					MessageBox(NULL, "离开成功！", "提示", MB_OK);
+					RefreshMemberList();
+				}
+				else {
+					MessageBox(NULL, "会员已离开！", "错误", MB_OK);
+				}
+				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+				break;
+			}
 			default:
 				break;
 			}
