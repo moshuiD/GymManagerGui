@@ -23,7 +23,7 @@ FileHelperState SaveMemberInfo(Member* member) {
 }
 
 FileHelperState LoadMembers(MemberList* members) {
-	char buff[1024] = { 0 };
+	char buff[4096] = { 0 };
 	int numOfBytes = 0;
 	FILE* fpLocalDatabase = fopen(szPath, "r");
 	if (NULL == fpLocalDatabase) {
@@ -51,7 +51,7 @@ FileHelperState SaveMembers(MemberList* members) {
 	}
 	MemberNode* member = NULL;
 	for (int state = ListFirst(members->m_Begin, &member); STATE_SUCCESS == state; state = ListNext(member, &member)) {
-		char buff[1024] = { 0 };
+		char buff[4096] = { 0 };
 		if (Member2Json(member->m_data, buff) != STATE_SUCCESS) {
 			return FileSaveError;
 		}

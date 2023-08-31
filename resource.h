@@ -15,6 +15,7 @@
 #define IDD_DIALOG1                     132
 #define IDD_RechargeForm                132
 #define IDD_MemberBodyInfoForm          134
+#define IDD_AddMemberBodyInfoForm       135
 #define IDC_BOTTON                      1001
 #define IDC_MEMBERLIST                  1005
 #define IDC_ADDMEMBER                   1008
@@ -40,9 +41,16 @@
 #define IDC_EDIT1                       1025
 #define IDC_RECHARGEEDITBOX             1025
 #define IDC_RECHARGEOK                  1026
-#define IDC_LIST1                       1027
 #define IDC_MEMBERBODYLIST              1027
 #define IDC_IDC_OK                      1029
+#define IDC_DELETEBODYINFOBUTTON        1029
+#define IDC_HEIGHTBOX                   1030
+#define IDC_WEIGHT                      1031
+#define IDC_FAT                         1032
+#define IDC_MEMBERBODYINFOBUTTON        1033
+#define IDC_ADDMEMBERINFO               1034
+#define IDC_ADDMEMBERINFO2              1035
+#define IDC_REPLACEMAMBERINFO2          1035
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -50,9 +58,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        135
+#define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1028
+#define _APS_NEXT_CONTROL_VALUE         1035
 #define _APS_NEXT_SYMED_VALUE           110
 #endif
 #endif

@@ -5,6 +5,7 @@ int LeaveGym(unsigned int id);
 typedef enum {
 	AccessManager_MemberNotFound = 1,
 	AccessManager_MemberNotEnter,
+	AccessManager_MemberIsEnter,
 	AccessManager_NotEnoughMoney,
 	AccessManager_MemberInfoListFilled,
 }AccessManagerErrorCode;

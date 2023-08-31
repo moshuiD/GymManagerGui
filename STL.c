@@ -25,6 +25,9 @@ int push_back(iterator begin, void* data)
 	do
 	{
 		num++;
+		if (num == iter->m_uMax) {
+			return -2;
+		}
 		if (NULL == iter->m_Next) {
 			iterator tempNode = (iterator)malloc(sizeof(struct Node));
 			tempNode->m_Data = data;
@@ -35,9 +38,6 @@ int push_back(iterator begin, void* data)
 			iter->m_Next = tempNode;//mount the next node
 
 			iter = iter->m_Next;
-		}
-		if (num == iter->m_uMax) {
-			return ~0;
 		}
 		iter = iter->m_Next;
 	} while (NULL != iter);

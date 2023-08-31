@@ -19,6 +19,9 @@ AccessManagerErrorCode EnterGym(unsigned int id) {
 	if (NULL == mem) {
 		return AccessManager_MemberNotFound;
 	}
+	if (In == mem->m_State) {
+		return AccessManager_MemberIsEnter;
+	}
 	mem->m_State = In;
 	time_t currentTime;
 	struct tm* info;
@@ -28,7 +31,6 @@ AccessManagerErrorCode EnterGym(unsigned int id) {
 	SyncDatabase();
 	return STATE_SUCCESS;
 }
-
 AccessManagerErrorCode LeaveGym(unsigned int id) {
 	Member* mem = NULL;
 	GetMember(id, &mem);
@@ -38,7 +40,6 @@ AccessManagerErrorCode LeaveGym(unsigned int id) {
 	if (Out == mem->m_State) {
 		return AccessManager_MemberNotEnter;
 	}
-	mem->m_State = Out;
 	float t_Money = mem->m_fmoney;
 	time_t inTime = Char2Time(mem->m_Time.m_szInTime);
 	time_t currentTime;
@@ -47,13 +48,13 @@ AccessManagerErrorCode LeaveGym(unsigned int id) {
 	if (t_Money - (interval * feePerSecond * 0.8f) < 0) {
 		return AccessManager_NotEnoughMoney;
 	}
+	mem->m_State = Out;
 	mem->m_fmoney = t_Money - (interval * feePerSecond * 0.8f);
-	SyncDatabase();
-	return STATE_SUCCESS;
+	return SyncDatabase();
 }
 AccessManagerErrorCode AddMemberBodyInfo(unsigned int id, unsigned int height, unsigned int weight, float fat) {
 	Member* mem = NULL;
-	GetMember(id, mem);
+	GetMember(id, &mem);
 	if (NULL == mem) {
 		return AccessManager_MemberNotFound;
 	}
@@ -69,12 +70,11 @@ AccessManagerErrorCode AddMemberBodyInfo(unsigned int id, unsigned int height, u
 	memberBodyInfo->m_uHeight = height;
 	memberBodyInfo->m_uWeight = weight;
 	memberBodyInfo->m_fBodyFat = fat;
-	if (push_back(mem->m_BodyInfoList->m_Begin, memberBodyInfo) == ~0) {
+	if (push_back(mem->m_BodyInfoList->m_Begin, memberBodyInfo) == -2) {
 		FreeMemberBodyInfo(memberBodyInfo);
 		return AccessManager_MemberInfoListFilled;
 	}
-	SyncDatabase();
-	return STATE_SUCCESS;
+	return SyncDatabase();
 }
 AccessManagerErrorCode ReplaceBodyInfo(Member* thisMember, char* const date, MemberBodyInfo* memData) {
 	MemberBodyInfoNode* MemberBodyInfo = NULL;
@@ -82,7 +82,8 @@ AccessManagerErrorCode ReplaceBodyInfo(Member* thisMember, char* const date, Mem
 		if (strcmp(MemberBodyInfo->m_data->m_szDate, date) == 0) {
 			FreeMemberBodyInfo(MemberBodyInfo->m_data);
 			MemberBodyInfo->m_data = memData;
-			SyncDatabase();
+			return SyncDatabase();
 		}
 	}
+
 }

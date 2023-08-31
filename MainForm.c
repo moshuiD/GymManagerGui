@@ -138,7 +138,7 @@ static int InitMemberList() {
 	vcl.iSubItem = 8;
 	ListView_InsertColumn(g_hList, 8, &vcl);
 	vcl.pszText = "进入/离开健身房时间";
-	vcl.cx = 90;
+	vcl.cx = 120;
 	vcl.iSubItem = 9;
 	ListView_InsertColumn(g_hList, 9, &vcl);
 }
@@ -266,10 +266,14 @@ INT_PTR CALLBACK MainFormCallBack(HWND hDlg, UINT message, WPARAM wParam, LPARAM
 				break;
 			}
 			case(IDC_DELETEMEMBER): {
-				DeleteCard(g_MembersSelectedid);
-				RefreshMemberList();
 				SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-				MessageBox(NULL, "删除成功！", "提示", MB_OK);
+				char buff[64] = { 0 };
+				sprintf(buff, "将要删除用户 %u\r\n操作不可逆，是否继续？", g_MembersSelectedid);
+				if (IDOK == MessageBox(NULL, buff, "提示", MB_OKCANCEL)) {
+					DeleteCard(g_MembersSelectedid);
+					RefreshMemberList();
+					MessageBox(NULL, "删除成功！", "提示", MB_OK);
+				}
 				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 				break;
 			}
@@ -294,13 +298,23 @@ INT_PTR CALLBACK MainFormCallBack(HWND hDlg, UINT message, WPARAM wParam, LPARAM
 			}
 			case(IDC_LEAVE): {
 				SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-				
-				if (LeaveGym(g_MembersSelectedid) == STATE_SUCCESS) {
+				switch (LeaveGym(g_MembersSelectedid))
+				{
+				case(STATE_SUCCESS): {
 					MessageBox(NULL, "离开成功！", "提示", MB_OK);
 					RefreshMemberList();
+					break;
 				}
-				else {
-					MessageBox(NULL, "会员已离开！", "错误", MB_OK);
+				case(AccessManager_NotEnoughMoney): {
+					MessageBox(NULL, "余额不足！\r\n请充值", "错误", MB_OK);
+					break;
+				}
+				case(AccessManager_MemberNotEnter): {
+					MessageBox(NULL, "会员不在健身房内！", "错误", MB_OK);
+					break;
+				}
+				default:
+					break;
 				}
 				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 				break;
@@ -309,6 +323,37 @@ INT_PTR CALLBACK MainFormCallBack(HWND hDlg, UINT message, WPARAM wParam, LPARAM
 				SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 				DialogBoxParam(hInst, MAKEINTRESOURCE(IDD_MemberBodyInfoForm), g_hDlg, MemberBodyInfoCallBack, &g_MembersSelectedid);
 				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+				break;
+			}
+			case(IDC_ADDMEMBERBODYINFO): {
+				SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+				DialogBoxParam(hInst, MAKEINTRESOURCE(IDD_AddMemberBodyInfoForm), g_hDlg, AddMemberBodyInfoFormCallBack, &g_MembersSelectedid);
+				//add memberBodyInfo.
+				switch (AddMemberBodyInfo(g_MembersSelectedid, g_BodyData.m_uHeight, g_BodyData.m_uWeight, g_BodyData.m_fFat))
+				{
+				case(AccessManager_MemberInfoListFilled): {
+					SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+					MessageBox(NULL, "新增错误，列表已满！", "错误", MB_OK);
+					SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+					break;
+				}
+				case(AccessManager_MemberNotEnter): {
+					SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+					MessageBox(NULL, "会员未进入健身房！", "错误", MB_OK);
+					SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+					break;
+				}
+				case(STATE_SUCCESS): {
+					SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+					MessageBox(NULL, "添加成功！", "信息", MB_OK);
+					break;
+				}
+				default:
+					break;
+				}
+
+				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+				RefreshMemberList(); 
 				break;
 			}
 			default:
