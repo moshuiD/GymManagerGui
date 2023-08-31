@@ -69,6 +69,9 @@
     <ClInclude Include="RechargeForm.h">
       <Filter>Form</Filter>
     </ClInclude>
+    <ClInclude Include="MemberBodyInfoForm.h">
+      <Filter>Form</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GymManagerGui.c">
@@ -102,6 +105,9 @@
       <Filter>Form</Filter>
     </ClCompile>
     <ClCompile Include="RechargeForm.c">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="MemberBodyInfoForm.c">
       <Filter>Form</Filter>
     </ClCompile>
   </ItemGroup>

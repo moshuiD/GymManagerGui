@@ -14,6 +14,7 @@
 #define IDD_MainForm                    129
 #define IDD_DIALOG1                     132
 #define IDD_RechargeForm                132
+#define IDD_MemberBodyInfoForm          134
 #define IDC_BOTTON                      1001
 #define IDC_MEMBERLIST                  1005
 #define IDC_ADDMEMBER                   1008
@@ -39,6 +40,8 @@
 #define IDC_EDIT1                       1025
 #define IDC_RECHARGEEDITBOX             1025
 #define IDC_RECHARGEOK                  1026
+#define IDC_LIST1                       1027
+#define IDC_MEMBERBODYLIST              1027
 #define IDC_IDC_OK                      1029
 #define IDC_STATIC                      -1
 
@@ -47,9 +50,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        134
+#define _APS_NEXT_RESOURCE_VALUE        135
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1027
+#define _APS_NEXT_CONTROL_VALUE         1028
 #define _APS_NEXT_SYMED_VALUE           110
 #endif
 #endif

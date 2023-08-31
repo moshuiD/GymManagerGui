@@ -5,5 +5,6 @@
 #include "AddMemberForm.h"
 #include "RechargeForm.h"
 #include "AccessManager.h"
+#include "MemberBodyInfoForm.h"
 #include <CommCtrl.h>
 INT_PTR CALLBACK MainFormCallBack(HWND, UINT, WPARAM, LPARAM);

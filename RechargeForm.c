@@ -37,6 +37,7 @@ INT_PTR CALLBACK RechargeFormCallBack(HWND hDlg, UINT message, WPARAM wParam, LP
 					g_mem->m_fmoney = g_mem->m_fmoney + chargeNum;
 					SyncDatabase();
 					EndDialog(hDlg, LOWORD(wParam));
+					MessageBox(NULL, "充值成功！", "提示", MB_OK);
 					return (INT_PTR)TRUE;
 				}
 			}

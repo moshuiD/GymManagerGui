@@ -136,6 +136,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GymManagerGui.h" />
     <ClInclude Include="MainForm.h" />
+    <ClInclude Include="MemberBodyInfoForm.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="RechargeForm.h" />
     <ClInclude Include="Resource.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="FileHelper.c" />
     <ClCompile Include="GymManagerGui.c" />
     <ClCompile Include="MainForm.c" />
+    <ClCompile Include="MemberBodyInfoForm.c" />
     <ClCompile Include="Model.c" />
     <ClCompile Include="RechargeForm.c" />
     <ClCompile Include="STL.c" />
