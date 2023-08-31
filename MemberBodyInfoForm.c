@@ -144,6 +144,11 @@ INT_PTR CALLBACK MemberBodyInfoCallBack(HWND hDlg, UINT message, WPARAM wParam, 
 		}
 		case(IDC_ADDMEMBERINFO): {
 			SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+			if (In != g_member->m_State) {
+				MessageBox(NULL, "会员未进入健身房！", "错误", MB_OK);
+				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+				break;
+			}
 			DialogBoxParam(hInst, MAKEINTRESOURCE(IDD_AddMemberBodyInfoForm), g_hDlg, AddMemberBodyInfoFormCallBack, &g_member->m_uID);
 			//add memberBodyInfo.
 			switch (AddMemberBodyInfo(g_member->m_uID,g_BodyData.m_uHeight, g_BodyData.m_uWeight,g_BodyData.m_fFat))
@@ -151,12 +156,6 @@ INT_PTR CALLBACK MemberBodyInfoCallBack(HWND hDlg, UINT message, WPARAM wParam, 
 			case(AccessManager_MemberInfoListFilled): {
 				SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 				MessageBox(NULL, "新增错误，列表已满！", "错误", MB_OK);
-				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-				break;
-			}
-			case(AccessManager_MemberNotEnter): {
-				SetWindowPos(g_hDlg, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-				MessageBox(NULL, "会员未进入健身房！", "错误", MB_OK);
 				SetWindowPos(g_hDlg, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 				break;
 			}
