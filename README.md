@@ -1,5 +1,6 @@
 # GymManagerGui
-GymManagerGui[![CodeFactor](https://www.codefactor.io/repository/github/moshuid/gymmanagergui/badge)](https://www.codefactor.io/repository/github/moshuid/gymmanagergui)  
+GymManagerGui  
+[![CodeFactor](https://www.codefactor.io/repository/github/moshuid/gymmanagergui/badge)](https://www.codefactor.io/repository/github/moshuid/gymmanagergui)  
 An Academic Engineering Practice project.  
 A windowed management system powered by C.  
 Question:  
